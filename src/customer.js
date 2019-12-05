@@ -1,19 +1,19 @@
 require('dotenv').config()
 var db = require('../config/database')
 
-let GetCustomers = (req, res) => {
-    let query = "SELECT * FROM customers"
+let GetCustomers = (callback) => {
+    const query = "SELECT * FROM customers"
+
     db.query(query, (err, result) => {
-        if (err) res.send(err)
-        
-        res.render("index", {
-            customers: result
-        })
+        if (err) 
+            callback(err, null)
+        else
+            callback(null, result)
     })
 }
 
-let PivotCustomers = (req, res) => {
-    let query = `select CONCAT(first_name, " ", last_name) as full_name,email,
+let PivotCustomers = (callback) => {
+    const query = `select CONCAT(first_name, " ", last_name) as full_name,email,
         sum(IF(item = 'Barang1', quantity, 0)) as Barang1,
         sum(IF(item = 'Barang2', quantity, 0)) as Barang2,
         sum(IF(item = 'Barang3', quantity, 0)) as Barang3,
@@ -26,13 +26,11 @@ let PivotCustomers = (req, res) => {
         sum(IF(item = 'Barang10', quantity, 0)) as Barang10
     from customers GROUP by first_name;`;
 
-
     db.query(query, (err, result) => {
-        if (err) res.send(err)
-
-        res.render("pivot", {
-            customers: result
-        })
+        if (err)
+            callback(err, null)
+        else 
+            callback(null, result)
     })
 
 }

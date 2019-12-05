@@ -14,28 +14,22 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-
 // route
-app.get('/customers', (req, res) => {
-    customer.GetCustomers((err, result) => {
-        if (err) throw err
-        
-        res.render("index", {
-            customers: result
-        })
+app.get('/customers', async (req, res) => {
+    const result = await customer.GetCustomers
+    
+    res.render("index", {
+        customers: result
     })
 })
 
-app.get('/customers/pivot', (req, res) => {
-    customer.PivotCustomers((err, result) => {
-        if (err) throw err
-
-        res.render("pivot", {
-            customers: result
-        })
+app.get('/customers/pivot', async (req, res) => {
+    const result = await customer.PivotCustomers
+    
+    res.render("pivot", {
+        customers: result
     })
 })
-
 
 const port = process.env.PORT
 app.listen(port, () => {

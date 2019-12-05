@@ -1,18 +1,17 @@
 require('dotenv').config()
 var db = require('../config/database')
 
-let GetCustomers = (callback) => {
+const GetCustomers = new Promise((resolve, reject) => {
     const query = "SELECT * FROM customers"
 
     db.query(query, (err, result) => {
         if (err) 
-            callback(err, null)
-        else
-            callback(null, result)
+            reject(err)
+        resolve(result)
     })
-}
+})
 
-let PivotCustomers = (callback) => {
+let PivotCustomers = new Promise((resolve, reject) => {
     const query = `select CONCAT(first_name, " ", last_name) as full_name,email,
         sum(IF(item = 'Barang1', quantity, 0)) as Barang1,
         sum(IF(item = 'Barang2', quantity, 0)) as Barang2,
@@ -28,12 +27,10 @@ let PivotCustomers = (callback) => {
 
     db.query(query, (err, result) => {
         if (err)
-            callback(err, null)
-        else 
-            callback(null, result)
+            reject(err)
+        resolve(result)
     })
-
-}
+})
 
 module.exports = {
     GetCustomers,

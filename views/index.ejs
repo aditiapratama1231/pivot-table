@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Customers :</h3>
+    <a href="/customers/pivot">Pivot !</a>
+    <br>
+    <br>
+    <table border="1" width="500px" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+        <% customers.forEach((customer, index) => { %>
+            <tr>
+                <td><%= customer.id %></td>
+                <td><%= customer.first_name + " "+ customer.last_name %></td>
+                <td><%= customer.email %></td>
+                <td><%= customer.item %></td>
+                <td><%= customer.quantity %></td>
+                <td><%= customer.total_price %></td>
+            </tr>
+        <% }) %>
+    </table>
+    
+</body>
+</html>

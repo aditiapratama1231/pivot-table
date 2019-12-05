@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Customers Pivot :</h3>
+    <a href="/customers">Original</a>
+    <br>
+    <br>
+    <table border="1" width="500px" cellpadding="10">
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <% for (i = 1; i <= 10; i ++) { %>
+                <th>Barang<%= i %></th>
+            <% } %>
+        </tr>
+        <% customers.forEach((customer, index) => { %>
+        <tr>
+            <td><%= customer.full_name %></td>
+            <td><%= customer.email %></td>
+            <td><%= customer.Barang1 %></td>
+            <td><%= customer.Barang2 %></td>
+            <td><%= customer.Barang3 %></td>
+            <td><%= customer.Barang4 %></td>
+            <td><%= customer.Barang5 %></td>
+            <td><%= customer.Barang6 %></td>
+            <td><%= customer.Barang7 %></td>
+            <td><%= customer.Barang8 %></td>
+            <td><%= customer.Barang9 %></td>
+            <td><%= customer.Barang10 %></td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>

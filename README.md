@@ -15,7 +15,7 @@ import schema and dummy data .sql from `.mysql-dump` folder
 
 # How To Run
 
-You need those requirements to run this project :
+You need these requirements to run this project :
 - Node v10.x or later
 - Mysql 5.7
 

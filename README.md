@@ -2,7 +2,7 @@
 
 # Setup
 
-Copy .env file
+Copy .env.example to .env file
 
 ```
 DB_HOST=

@@ -2,9 +2,30 @@ version: '3'
 services:
   web:
     build: .
-    command: npm run dev
+    command: bash -c "npm run dev && ./wait-for-mysql.sh"
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules
     ports:
       - "3020:8050"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    environment:
+      DB_HOST: localhost
+      DB_USER: $MYSQL_USER
+      DB_PASSWORD: $MYSQL_PASSWORD
+      DB_NAME: $MYSQL_DATABASE
+    restart: on-failure:5 
+  mysql:
+    image: mysql:latest
+    volumes:
+      - "./mysql-dump:/docker-entrypoint-initdb.d"
+      - "./.mysql-data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: "${DB_NAME}"
